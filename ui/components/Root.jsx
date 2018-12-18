@@ -1,20 +1,15 @@
-import React from 'react'
-import withStyles from '@material-ui/core/styles/withStyles'
+import React from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = {
-    root: {
-    },
+  root: {
+  },
 };
 
-class Root extends React.Component {
-    render() {
-        const { classes  } = this.props
+const Root = ({ classes }) => (
+  <div className={classes.root}>
+    i am root
+  </div>
+);
 
-        return (
-            <div className={classes.root}>
-                i am root
-            </div>
-        )
-    }
-}
-export default Root
+export default withStyles(styles)(Root);
