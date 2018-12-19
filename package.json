@@ -4,7 +4,8 @@
   "description": "PGA Leaderboard web app",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "api": "mongod --dbpath data/local | node api/index.js"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,11 @@
   "dependencies": {
     "@material-ui/core": "^3.7.0",
     "@material-ui/icons": "^3.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.0.2",
+    "mongodb": "^3.1.10",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
