@@ -2,10 +2,13 @@ const { buildSchema } = require('graphql');
 
 module.exports = buildSchema(`
     type Query {
-        players: [Player]
+        getPlayers: [Player]
     }
     type Mutation {
-        setBlah (blah: String): String
+        addPlayer (
+            firstName: String,
+            lastName: String,
+        ): String
     }
     type Player {
         _id: String,

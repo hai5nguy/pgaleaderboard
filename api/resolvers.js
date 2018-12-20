@@ -1,10 +1,50 @@
+const db = require('./db');
 
-module.exports = {
-  players: () => {
-    console.log('yo');
-    return [{
-      _id: 'id', firstName: 'firstname', lastName: 'lastName', score: 1,
-    }];
-  },
-  setBlah: () => 'blah',
+/**
+ * Get list of players
+ * @returns {Object[]} List of players
+ */
+const getPlayers = () => db.read('players', {});
+
+
+/**
+ * Add player to the players collection
+ * @param {Object} player The player
+ * @param {string} player.firstName Player's first name
+ * @param {string} player.lastName Player's last name
+ * @throws Will throw error if unable to add player to database
+ * @returns {string} SUCCESS if no errors
+ */
+const addPlayer = async ({ firstName, lastName }) => {
+  const score = 0;
+
+  await db.create('players', {
+    firstName,
+    lastName,
+    score,
+  });
+
+  return 'SUCCESS';
 };
+
+
+/**
+ * Update a player's detail
+ * @param {Object} detail The new detail of the player to be updated
+ * @param {string} _id The id of the player to be updated.
+ * @param {string} firstName The first name of the player.
+ * @param {string} lastName The last name of the player.
+ * @param {string} score The score of the player.
+ */
+const updatePlayer = async ({
+  _id, firstName, lastName, score,
+}) => {
+  await db.update(
+    'players',
+    { _id },
+    { firstName, lastName, score },
+  );
+  return 'SUCCESS';
+};
+
+module.exports = { getPlayers, addPlayer, updatePlayer };
