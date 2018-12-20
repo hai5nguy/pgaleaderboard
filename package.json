@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "api": "mongod --dbpath data/local | node api/index.js"
+    "api": "mongod --dbpath data/local | nodemon api/index.js",
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,8 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.9",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
