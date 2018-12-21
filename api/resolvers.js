@@ -16,8 +16,7 @@ const getPlayers = () => db.read('players', {});
  * @returns {string} SUCCESS if no errors
  */
 const addPlayer = async ({ firstName, lastName }) => {
-  const score = 0;
-
+  const score = 1;
   await db.create('players', {
     firstName,
     lastName,

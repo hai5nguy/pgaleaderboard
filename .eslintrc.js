@@ -7,13 +7,18 @@ module.exports = {
   "extends": "airbnb",
   "rules": {
     "react/prop-types": "off",
+    "no-underscore-dangle": "off"
   },
   "settings": {
     "import/resolver": {
       "node": {
         "paths": [".", "ui"]
-      }
-      "alias": true
+      },
+      "alias": [
+        ["actions", "./ui/actions"],
+        ["components", "./ui/components"],
+        ["store", "./store/store.js"]
+      ]
     }
   }
 };

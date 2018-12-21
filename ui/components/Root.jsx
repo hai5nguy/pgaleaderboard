@@ -1,8 +1,10 @@
-import React from 'react';
+import React from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
 
-import Board from './Board';
+import Board from 'components/Board';
 
 const styles = theme => ({
   root: {
