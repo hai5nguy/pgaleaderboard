@@ -19,10 +19,6 @@ module.exports = (_, env) => {
           exclude: /node_module/,
           use: {
             loader: 'babel-loader',
-            options: {
-              plugins: ['@babel/plugin-syntax-class-properties', '@babel/plugin-transform-runtime', '@babel/plugin-proposal-class-properties'],
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-            },
           },
         },
       ],
@@ -33,6 +29,7 @@ module.exports = (_, env) => {
       }),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+        'process.env.GRAPHQL_ENDPOINT': JSON.stringify(isProd ? '/graphql' : 'http://localhost:5001/graphql'),
       }),
     ],
     resolve: {
@@ -44,9 +41,15 @@ module.exports = (_, env) => {
       extensions: ['.js', '.jsx'],
     },
     devServer: {
-      contentBase: './ui/static/',
+      host: 'localhost',
+      // contentBase: './ui/static/',
       historyApiFallback: true,
       port: 5000,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+        'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
+      },
     },
     devtool: 'eval-source-map',
   };

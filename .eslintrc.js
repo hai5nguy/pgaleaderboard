@@ -17,7 +17,7 @@ module.exports = {
       "alias": [
         ["actions", "./ui/actions"],
         ["components", "./ui/components"],
-        ["store", "./store/store.js"]
+        ["store", "./ui/store/store.js"]
       ]
     }
   }

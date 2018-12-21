@@ -4,7 +4,7 @@
   "description": "PGA Leaderboard web app",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "mongod --dbpath data/local | node api/index.js | webpack-dev-server",
     "api": "mongod --dbpath data/local | nodemon api/index.js",
     "test": "jest --watch"
   },
@@ -21,16 +21,17 @@
   "homepage": "https://github.com/hai5nguy/pgaleaderboard#readme",
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.2.1",
-    "@babel/plugin-syntax-class-properties": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "copy-webpack-plugin": "^4.6.0",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-webpack": "^0.10.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
