@@ -13,6 +13,7 @@ module.exports = {
       "node": {
         "paths": [".", "ui"]
       }
+      "alias": true
     }
   }
 };
