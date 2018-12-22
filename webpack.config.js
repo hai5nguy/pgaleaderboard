@@ -37,19 +37,14 @@ module.exports = (_, env) => {
         actions: resolve(__dirname, 'ui/actions'),
         components: resolve(__dirname, 'ui/components'),
         store: resolve(__dirname, 'ui/store/store.js'),
+        ui: resolve(__dirname, 'ui'),
       },
       extensions: ['.js', '.jsx'],
     },
     devServer: {
-      host: 'localhost',
       // contentBase: './ui/static/',
       historyApiFallback: true,
       port: 5000,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-        'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
-      },
     },
     devtool: 'eval-source-map',
   };

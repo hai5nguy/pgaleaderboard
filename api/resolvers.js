@@ -1,4 +1,5 @@
 const db = require('./db');
+const { ObjectID } = require('mongodb');
 
 /**
  * Get list of players
@@ -40,10 +41,25 @@ const updatePlayer = async ({
 }) => {
   await db.update(
     'players',
-    { _id },
+    { _id: ObjectID(_id) },
     { firstName, lastName, score },
   );
   return 'SUCCESS';
 };
 
-module.exports = { getPlayers, addPlayer, updatePlayer };
+
+/**
+ * Delete a player
+ * @param {string} _id Id of the player to delete.
+ */
+const deletePlayer = async ({ _id }) => {
+  await db.del(
+    'players',
+    { _id: ObjectID(_id) },
+  );
+  return 'SUCCESS';
+};
+
+module.exports = {
+  getPlayers, addPlayer, updatePlayer, deletePlayer,
+};

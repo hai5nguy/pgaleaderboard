@@ -1,3 +1,5 @@
+const { ObjectID } = require('mongodb');
+
 const db = require('./db');
 const resolvers = require('./resolvers');
 
@@ -27,18 +29,33 @@ describe('Resolvers', () => {
     it('should update a player with given _id', async () => {
       db.update = jest.fn();
       const player = {
-        _id: 1, firstName: 'bob', lastName: 'smith', score: 3,
+        _id: '1234567890af', firstName: 'bob', lastName: 'smith', score: 3,
       };
       const result = await resolvers.updatePlayer(player);
       expect(db.update)
         .toHaveBeenCalledWith(
           'players',
-          { _id: player._id },  // eslint-disable-line
+          { _id: ObjectID(player._id) },  // eslint-disable-line
           {
             firstName: player.firstName,
             lastName: player.lastName,
             score: player.score,
           },
+        );
+      expect(result).toEqual('SUCCESS');
+    });
+  });
+  describe('deletePlayer', () => {
+    it('should delete a player with given _id', async () => {
+      db.del = jest.fn();
+      const player = {
+        _id: '1234567890af',
+      };
+      const result = await resolvers.deletePlayer(player);
+      expect(db.del)
+        .toHaveBeenCalledWith(
+          'players',
+          { _id: ObjectID(player._id) },
         );
       expect(result).toEqual('SUCCESS');
     });

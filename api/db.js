@@ -60,9 +60,17 @@ const read = async (collection, query, options) => {
  * @returns {object} MongoClient promise
  */
 const update = (collection, filter, value) => _db.collection(collection)
-  .findOneAndUpdate(filter, { $set: value }, { upsert: true });
+  .findOneAndUpdate(filter, { $set: value });
 
+/**
+ * Delete one document in a given collection
+ * @param {string} collection Name of collection
+ * @param {object} filter Query filter to search for
+ * @throws Error if deletion fail
+ * @returns {object} MongoClient promise
+ */
+const del = (collection, filter) => _db.collection(collection).deleteOne(filter);
 
 module.exports = {
-  start, create, read, update,
+  start, create, read, update, del,
 };
