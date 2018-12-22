@@ -107,7 +107,7 @@ class PlayerRow extends React.Component {
         <div className={classes.deleteContainer}>
           <Tooltip title="Delete Player" placement="right-start">
             <IconButton onClick={() => deletePlayer(_id)}>
-              <DeleteForever />
+              <DeleteForever nativeColor="#001d48" />
             </IconButton>
           </Tooltip>
         </div>

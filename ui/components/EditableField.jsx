@@ -49,7 +49,6 @@ class EditableField extends React.Component {
     blur = () => {
       const { onComplete, value } = this.props;
       this.setState({ editing: false });
-      console.log('value', value);
       onComplete(value);
     }
 

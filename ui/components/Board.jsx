@@ -2,8 +2,10 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
+import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
-// import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
+import AddCircle from '@material-ui/icons/AddCircle';
 
 import Header from 'components/Header';
 import PlayerRow from 'components/PlayerRow';
@@ -14,8 +16,8 @@ const styles = {
   root: {
     margin: 10,
   },
-  header: {
-
+  addIcon: {
+    fontSize: '2rem',
   },
 };
 
@@ -23,7 +25,11 @@ const Board = ({ classes, players }) => (
   <Paper className={classes.root}>
     <Header />
     {players.map(p => (<PlayerRow key={p._id} player={p} />))}
-    <input type="button" value="Add" onClick={addPlayer} />
+    <Tooltip title="Add Player" placement="right-start">
+      <IconButton onClick={addPlayer}>
+        <AddCircle className={classes.addIcon} nativeColor="#001d48" />
+      </IconButton>
+    </Tooltip>
   </Paper>
 );
 
