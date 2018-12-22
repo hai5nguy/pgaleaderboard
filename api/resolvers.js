@@ -1,5 +1,5 @@
-const db = require('./db');
 const { ObjectID } = require('mongodb');
+const db = require('./db');
 
 /**
  * Get list of players
@@ -16,8 +16,7 @@ const getPlayers = () => db.read('players', {});
  * @throws Will throw error if unable to add player to database
  * @returns {string} SUCCESS if no errors
  */
-const addPlayer = async ({ firstName, lastName }) => {
-  const score = 1;
+const addPlayer = async ({ firstName, lastName, score }) => {
   await db.create('players', {
     firstName,
     lastName,

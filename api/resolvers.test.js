@@ -19,9 +19,9 @@ describe('Resolvers', () => {
   describe('addPlayer', () => {
     it('should add a player with score 0', async () => {
       db.create = jest.fn();
-      const player = { firstName: 'bob', lastName: 'smith' };
+      const player = { firstName: 'bob', lastName: 'smith', score: 1 };
       const result = await resolvers.addPlayer(player);
-      expect(db.create).toHaveBeenCalledWith('players', { ...player, score: 1 });
+      expect(db.create).toHaveBeenCalledWith('players', player);
       expect(result).toEqual('SUCCESS');
     });
   });

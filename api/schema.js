@@ -8,6 +8,7 @@ module.exports = buildSchema(`
         addPlayer (
             firstName: String
             lastName: String
+            score: Int
         ): String
         updatePlayer (
             _id: String
