@@ -1,4 +1,6 @@
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import DeleteForever from '@material-ui/icons/DeleteForever';
 import IconButton from '@material-ui/core/IconButton';
@@ -7,14 +9,18 @@ import Tooltip from '@material-ui/core/Tooltip';
 import EditableField from 'components/EditableField';
 
 import deletePlayer from 'actions/delete-player';
-import updatePlayer from 'actions/update-player';
-import { isNumber } from 'ui/utils';
+import { HEIGHT_OF_PLAYER_ROW } from 'ui/constants';
 
 const styles = {
   root: {
     display: 'flex',
     height: 48,
     borderBottom: '1px solid #eceaea',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    transition: 'top 500ms ease-in-out',
   },
   nameContainer: {
     flexBasis: '60%',
@@ -42,71 +48,34 @@ class PlayerRow extends React.Component {
     this.state = { ...player };
   }
 
-  change = key => (value) => {
-    let v = value;
-
-    // score is constraint to [0, 100]
-    if (key === 'score') {
-      v = parseInt(v, 10);
-      if (!isNumber(v) || v < 0 || v > 100) {
-        v = '';
-      }
-    }
-
-    this.setState({
-      [key]: v,
-    });
-  }
-
-  complete = key => (value) => {
-    const { player: original } = this.props;
-
-    // if any player details is blank or matches the orginal, then
-    // do NOT update and return
-    if (value === '' || value === original[key]) {
-      this.setState({
-        [key]: original[key],
-      });
-      return;
-    }
-
-    const player = this.state;
-    updatePlayer({ ...player });
-  };
-
   render() {
-    const { classes } = this.props;
-    const {
-      _id, firstName, lastName, score,
-    } = this.state;
+    const { classes, player } = this.props;
+    const top = player.position * HEIGHT_OF_PLAYER_ROW;
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root} style={{ top }}>
         <div className={classes.nameContainer}>
           <EditableField
-            onChange={this.change('lastName')}
-            onComplete={this.complete('lastName')}
-            value={lastName}
+            name="lastName"
+            player={player}
           />
-        ,
+          ,
           <EditableField
             className={classes.firstName}
-            onChange={this.change('firstName')}
-            onComplete={this.complete('firstName')}
-            value={firstName}
+            name="firstName"
+            player={player}
           />
         </div>
         <div className={classes.scoreContainer}>
           <EditableField
-            onChange={this.change('score')}
-            onComplete={this.complete('score')}
-            value={score}
+            name="score"
+            player={player}
             showChip
           />
         </div>
         <div className={classes.deleteContainer}>
           <Tooltip title="Delete Player" placement="right-start">
-            <IconButton onClick={() => deletePlayer(_id)}>
+            <IconButton onClick={() => deletePlayer(player._id)}>
               <DeleteForever nativeColor="#001d48" />
             </IconButton>
           </Tooltip>
@@ -117,4 +86,11 @@ class PlayerRow extends React.Component {
   }
 }
 
-export default withStyles(styles)(PlayerRow);
+const mapStateToProps = (state, props) => ({
+  player: state.players.find(p => p._id === props._id),
+});
+
+export default compose(
+  connect(mapStateToProps),
+  withStyles(styles),
+)(PlayerRow);

@@ -12,9 +12,14 @@ import PlayerRow from 'components/PlayerRow';
 
 import AddForm from 'components/AddForm';
 
+import { HEIGHT_OF_PLAYER_ROW } from 'ui/constants';
+
 const styles = {
   root: {
     margin: 10,
+  },
+  rowContainer: {
+    position: 'relative',
   },
   addIcon: {
     fontSize: '2rem',
@@ -23,7 +28,7 @@ const styles = {
 
 class Board extends React.Component {
   state = {
-    adding: true,
+    adding: false,
   }
 
   setAdding = adding => () => {
@@ -33,11 +38,15 @@ class Board extends React.Component {
   render() {
     const { classes, players } = this.props;
     const { adding } = this.state;
-
     return (
       <Paper className={classes.root}>
         <Header />
-        {players.map(p => (<PlayerRow key={p._id} player={p} />))}
+        <div
+          className={classes.rowContainer}
+          style={{ height: players.length * HEIGHT_OF_PLAYER_ROW }}
+        >
+          {players.map(p => (<PlayerRow key={p._id} _id={p._id} />))}
+        </div>
         { adding ? (
           <AddForm
             onClose={this.setAdding(false)}
