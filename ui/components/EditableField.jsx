@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography';
 
 import updatePlayer from 'actions/update-player';
 
+import { isNumber } from 'ui/utils';
+
 const styles = theme => ({
   root: {
   },
@@ -36,10 +38,26 @@ class EditableField extends React.Component {
     this.input = React.createRef();
   }
 
+  componentDidUpdate() {
+    // if editing, then put focus on the input element
+    const { editing } = this.state;
+    if (editing) {
+      this.input.current.focus();
+    }
+  }
+
   change = (e) => {
-    this.setState({
-      value: e.target.value,
-    });
+    let { value } = e.target;
+    const { name } = this.props;
+
+    if (name === 'score' && value !== '' && isNumber(value)) {
+      value = parseInt(value, 10);
+      if (value < 0 || value > 100) {
+        value = '';
+      }
+    }
+
+    this.setState({ value });
   }
 
   click = () => {
@@ -47,11 +65,6 @@ class EditableField extends React.Component {
     this.setState({
       editing: !editing,
     });
-
-    // if editing, then put focus on the input element
-    if (this.input.ref) {
-      this.input.current.focus();
-    }
   }
 
   blur = () => {
@@ -65,7 +78,7 @@ class EditableField extends React.Component {
     const originalValue = player[name];
     if (value === '' || value === originalValue) {
       this.setState({
-        [name]: originalValue,
+        value: originalValue,
       });
       return;
     }

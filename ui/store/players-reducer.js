@@ -2,8 +2,8 @@ const sortByScoreAndLastName = (a, b) => {
   if (a.score > b.score) return 1;
   if (b.score > a.score) return -1;
 
-  if (a.lastName > b.lastName) return 1;
-  if (b.lastName > a.lastName) return -1;
+  if (a.lastName.toLowerCase() > b.lastName.toLowerCase()) return 1;
+  if (b.lastName.toLowerCase() > a.lastName.toLowerCase()) return -1;
 
   return 0;
 };
