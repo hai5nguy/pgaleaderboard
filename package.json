@@ -6,7 +6,8 @@
   "scripts": {
     "start": "mongod --dbpath data/local | node api/index.js | webpack-dev-server",
     "api": "mongod --dbpath data/local | nodemon api/index.js",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "deploy": "npm install && webpack -p --mode=production && node api/index.js"
   },
   "repository": {
     "type": "git",

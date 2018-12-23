@@ -24,6 +24,10 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true,
 }));
 
+// Serve out our frontend app
+app.use(express.static(`${__dirname}/../build`));
+app.use('*', express.static(`${__dirname}/../build/index.html`));
+
 // Start mongo then express
 async function start() {
   await db.start();
