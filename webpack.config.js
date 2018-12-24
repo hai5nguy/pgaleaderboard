@@ -42,20 +42,20 @@ module.exports = (_, env) => {
       extensions: ['.js', '.jsx'],
     },
     devServer: {
-      // contentBase: './ui/static/',
+      contentBase: './ui/static/',
       historyApiFallback: true,
       port: 5000,
     },
     devtool: 'eval-source-map',
   };
 
-  // if (isProd) {
-  //     config.plugins.push(
-  //         new CopyWebpackPlugin([
-  //             { from: 'ui/static/' },
-  //         ]),
-  //     )
-  // }
+  if (isProd) {
+    config.plugins.push(
+      new CopyWebpackPlugin([
+        { from: 'ui/static/' },
+      ]),
+    );
+  }
 
   return config;
 };
