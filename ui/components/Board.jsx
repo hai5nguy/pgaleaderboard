@@ -16,7 +16,8 @@ import { HEIGHT_OF_PLAYER_ROW } from 'ui/constants';
 
 const styles = {
   root: {
-    margin: 10,
+    margin: 'auto',
+    maxWidth: 500,
   },
   rowContainer: {
     position: 'relative',
